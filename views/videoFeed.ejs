@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Feed</title>
+    <link rel="stylesheet" href="/assets/css/styleVideoFeed.css">
+</head>
+<body class="">
+   
+  <!-- <%- include('components/header') %> -->
+
+ 
+    <div class="wrapper-body">
+        <div class="video-area">
+          <video id="myvideo" controls="" autoplay="true">
+              <source src="" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          <!-- <a href="https://www.bullseyesprizemachine.com/video-uploads/video_1.mp4-1728062446717-973209035.mp4" class="download-btn" download="">
+              Click here to download video
+          </a> -->
+      </div>
+      </div>
+
+
+<!-- <%- include('components/footer') %> -->
+<script>
+  var currentVideo = 1
+  const registrants = JSON.parse("<%= results %>".replace(/&#34;/g, '"'));
+    var video = document.getElementById("myvideo");
+    video.src = "/video-uploads/" + registrants[0].name;
+    video.addEventListener("ended", function() {
+     
+      // Video has finished playing, load the next video
+      loadNextVideo();
+    });
+    video.addEventListener('play',   
+ () => {
+    video.controls = false;
+  });
+  
+  
+    function loadNextVideo() { 
+      registrants
+      // Replace the video source with the URL of the next video
+      if(registrants.length>0){
+        if(registrants[currentVideo]!==undefined){
+      video.src = "/video-uploads/" + registrants[currentVideo].name;
+     
+      currentVideo++;
+        }
+      else{
+        video.src = "/video-uploads/" + registrants[0].name;
+        currentVideo=1
+      }
+      video.autoplay=true
+
+      }
+    }
+    function reloadPage() {
+  
+  location.reload();
+}
+
+setInterval(reloadPage, 1800000);
+  </script>
+</body>
+</html>

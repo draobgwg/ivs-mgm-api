@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - Vend</title>
+  <link rel="stylesheet" href="/assets/css/commonStyles.css">
+  <style>
+    .vend-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+    }
+    #vendButton {
+      background-color: #ff4155;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 3rem;
+      padding: 40px 80px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+    #vendButton:active {
+      background-color: #e03648;
+    }
+    #vendStatus {
+      margin-top: 24px;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body class="bg-blue">
+  <%- include('components/sidebar') %>
+  <%- include('components/header') %>
+  <div class="main-content">
+    <div class="vend-container">
+      <button id="vendButton">VEND</button>
+      <div id="vendStatus">Loading status...</div>
+    </div>
+  </div>
+
+  <script>
+    const AUTH_TOKEN = "<%= authToken %>";
+let currentVend = 0; // track current vend state
+
+    async function fetchVendStatus() {
+      try {
+        const res = await fetch(`/api/vend-status?authorization=${AUTH_TOKEN}`);
+        if (!res.ok) throw new Error('Failed to fetch status');
+        const data = await res.json();
+        updateStatus(data.vend);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('vendStatus').textContent = 'Error fetching status';
+      }
+    }
+
+    async function triggerVend() {
+      // Determine next state: toggle between 0 and 1
+      const nextState = currentVend === 1 ? 0 : 1;
+      try {
+        const res = await fetch(`/api/vend-complete?authorization=${AUTH_TOKEN}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 'vend-complete': nextState })
+        });
+        if (!res.ok) throw new Error('Failed to vend');
+        const data = await res.json();
+        updateStatus(data.vend);
+      } catch (err) {
+        console.error(err);
+        alert('Failed to vend');
+      }
+    }
+
+    function updateStatus(vend) {
+      currentVend = vend; // keep track of state
+      const statusEl = document.getElementById('vendStatus');
+      if (vend === 1) {
+        // Update button appearance when vending
+        document.getElementById('vendButton').textContent = 'VEND';
+        document.getElementById('vendButton').style.backgroundColor = '#ff4155';
+        statusEl.textContent = 'Machine is VENDING';
+        statusEl.style.color = '#ff4155';
+      } else {
+        // Idle state appearance
+        document.getElementById('vendButton').textContent = 'VEND';
+        document.getElementById('vendButton').style.backgroundColor = '#00c853';
+        statusEl.textContent = 'Machine is IDLE';
+        statusEl.style.color = '#00c853';
+      }
+    }
+
+    document.getElementById('vendButton').addEventListener('click', triggerVend);
+
+    // Initial load
+    fetchVendStatus();
+  </script>
+</body>
+</html>

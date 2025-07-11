@@ -1,0 +1,81 @@
+header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+main {
+  margin: 20px;
+}
+
+video {
+  width: 100%;
+}
+
+/* video details css  */
+.video-details-page {
+  background-color: #000;
+}
+.video-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.download-btn {
+  width: 390px;
+  height: 51px;
+  background: url(../images/btn-bg.png);
+  background-size: contain;
+  font-size: 0;
+  background-repeat: no-repeat;
+  margin-top: 30px;
+}
+#myvideo {
+  width: auto;
+  height: calc(90vh - 55px);
+  border: 5px solid #80ccf3;
+}
+
+/* Fullscreen for mobile devices */
+@media only screen and (max-width: 767px) {
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .video-area {
+    height: 100%;
+    display: block;
+  }
+  #myvideo {
+    width: calc(100% - 10px);
+    height: calc(100% - 70px);
+    object-fit: cover;
+    display: block;
+  }
+
+
+  .download-btn {
+    width: 300px;
+    height: 39px;
+    margin: auto;
+    background: url(../images/btn-bg.png);
+    background-size: contain;
+    font-size: 0;
+    background-repeat: no-repeat;
+    margin-top: 8px;
+    display: block;
+    margin-bottom: 10px;
+  }
+}

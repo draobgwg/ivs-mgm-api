@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="video-details-page">
+   
+  <!-- <%- include('components/header') %> -->
+
+  <div class="video-area">
+        <video id="myvideo" controls>
+            <source src="/video-uploads/<%= video %>" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <a href="/video-uploads/<%= video %>" class="download-btn" download>
+            Click here to download video
+        </a>
+    </div>
+
+
+<!-- <%- include('components/footer') %> -->
+</body>
+</html>

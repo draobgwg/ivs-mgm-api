@@ -1,0 +1,37 @@
+<div class="footer">
+    <!-- <h1>Mountain Dew</h1> -->
+    <p>&copy; <span id="year"></span> <a href="https://www.bigwigmonster.com/">BGWG MONSTER</a> All Rights Reserved.</p>
+
+  </div>
+  <script>
+    // Get the current year
+    const currentYear = new Date().getFullYear();
+  
+    // Insert the current year into the element with the id 'year'
+    document.getElementById('year').textContent = currentYear;
+    
+async function CheckToken() {
+  const token = localStorage.getItem("token")
+  const payload = {
+    token,
+    
+  };
+
+  const response =  await fetch("/api/v1/users/verify-token", {
+    method: 'POST', // Adjust method if needed (GET, PUT, etc.)
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+  if(response.status!==200){
+    localStorage.clear("token");
+    window.location.href="/admin/login"
+
+  }
+}
+CheckToken();
+
+
+
+  </script>

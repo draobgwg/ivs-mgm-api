@@ -1,0 +1,61 @@
+
+  <div class="sidebar">
+    <h2 class="dew-title">
+      <img style="background-color: #F2F2F2;"src="/images/logo1.png" alt="">
+    </h2>
+    <ul>
+      
+      <!-- <li class="<%= currentURL === 'admin/dashboard' ? 'active' : '' %>">
+        <a  href="/admin/dashboard">
+          <span class="nav-link-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+          </span>
+          <span>Dashboard</span>
+          </a>
+      </li> -->
+      <!-- <li class="<%= currentURL === 'admin/users' ? 'active' : '' %>" class="active">
+        <a  href="/admin/users">
+          <span class="nav-link-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="white" stroke="currentColor" ><path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"/></svg>          </span>
+          <span>Users</span>
+          </a>
+      </li> -->
+      <li class="<%= currentURL === 'admin/vend' ? 'active' : '' %>">
+        <a href="/admin/vend">
+          <span class="nav-link-icon">
+            <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="4" width="56" height="56" rx="8" fill="currentColor"/>
+            </svg>
+          </span>
+          <span>Vend</span>
+        </a>
+      </li>
+
+      <!-- <li class="<%= currentURL === 'admin/videos' ? 'active' : '' %>" class="active">
+        <a  href="/admin/videos">
+          <span class="nav-link-icon">
+            <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="100" fill="currentColor" />
+            </svg>       </span>
+          <span>Videos</span>
+          </a>
+      </li> -->
+      <!-- <li class="<%= currentURL === 'admin/users' ? 'active' : '' %>" class="active"><a href="/admin/users">Users</a></li> -->
+      <!-- <li id="logout-isolated"></li> -->
+      
+      
+    </ul>
+    <div id="logout-isolated">
+      <a  href="javascript:void(0)">logout</a>
+    </div>
+  </div>
+  <script>
+
+
+
+    document.getElementById('logout-isolated').addEventListener('click', function (event) {
+
+localStorage.clear("token");
+window.location.href="/admin/login"
+    });
+  </script>

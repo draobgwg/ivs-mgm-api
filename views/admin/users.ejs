@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - Users</title>
+  
+  <link rel="stylesheet" href="/assets/css/commonStyles.css">
+  <link rel="stylesheet" href="/assets/css/table.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-blue">
+  <%- include('components/sidebar') %>
+  <%- include('components/header') %>
+ 
+  <div class="main-content">
+    <div class="export-button">
+      <h2>Users</h2>
+      <a class="btn-main" id="export-link" href="/api/v1/users/export">Export</a>
+    </div>
+    <div class="table-class">
+      <div class="record-class">
+        <div>
+          <label>Records</label>
+          <select id="recordsPerPageSelect">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+        <div class="date-range-picker-class">
+          <label>Date Range</label>
+          <input type="text" id="dateRangePicker" placeholder="Select a date range">
+          <button id="resetButton">Reset</button>
+        </div>
+      </div>
+      
+
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Name</th> 
+            <th>Organizaion</th>           
+            <th>Email</th>
+            <th>Phone Number</th>
+            
+          
+            <th><a data-sort-column="created_ts" href="#" onclick="sortTable(event)">Created At</a></th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody  id="tableData">
+        
+        </tbody>
+      </table>
+      <div id="pagination-main"> <span id="pagination-info"></span>  <div id="pagination"></div></div>
+    </div>
+  </div>
+  <%- include('components/footer') %>
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="/assets/js/pagination.js"></script>
+
+</body>
+</html>
