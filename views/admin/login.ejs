@@ -32,7 +32,7 @@
 
 const token = localStorage.getItem("token");
     if(token){
-      window.location.href="/admin/videos"
+      window.location.href="/admin/vend"
     }
 
 const loginForm = document.getElementById('loginForm');
@@ -53,7 +53,7 @@ loginForm.addEventListener('submit', async (event) => {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem('token', data.accessToken);
-      window.location.href = '/admin/videos'; // Redirect to protected route
+      window.location.href = '/admin/vend'; // Redirect to protected route
     } else {
       alert('Invalid credentials');
     }

@@ -10,7 +10,7 @@ import machineRouter from "./controllers/machine/Routers";
 const app = express();
 const server = http.createServer(app);
 const allowedOrigins = [];
-const port = 3004;
+const port = 3011;
 app.use(express.json()); // This parses the request body as JSON
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.static(path.join(__dirname, "public")));
