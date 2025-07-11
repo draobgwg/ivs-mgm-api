@@ -24,13 +24,15 @@ class VendController {
             return res.status(401).json({ error: "Unauthorized" });
         }
 
-        // Expect body: { "vend-complete": 0 | 1 }
-        const requestedStateRaw = req.body["vend-complete"];
-        const requestedState = Number(requestedStateRaw) === 1 ? 1 : 0; // default to 0 for any invalid value
+        // If body has { "vend-complete": 1 } then vend is completed -> reset state to 0.
+        // Otherwise ("vend-complete": 0) set state to 1 indicating machine is vending.
+        const vendCompleteRaw = req.body["vend-complete"];
+        const isComplete = Number(vendCompleteRaw) === 1;
+        const newState = isComplete ? 0 : 1;
 
         try {
-            await vendService.setVendState(requestedState);
-            return res.json({ success: true, vend: requestedState });
+            await vendService.setVendState(newState);
+            return res.json({ success: true, vend: newState });
         } catch (error) {
             return res.status(500).json({ error: (error as Error).message });
         }

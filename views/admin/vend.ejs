@@ -58,13 +58,13 @@ let currentVend = 0; // track current vend state
     }
 
     async function triggerVend() {
-      // Determine next state: toggle between 0 and 1
-      const nextState = currentVend === 1 ? 0 : 1;
+      // Send correct flag to backend: 0 to START vending, 1 to COMPLETE vending
+      const vendCompleteFlag = currentVend === 1 ? 1 : 0;
       try {
         const res = await fetch(`/api/vend-complete?authorization=${AUTH_TOKEN}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 'vend-complete': nextState })
+          body: JSON.stringify({ 'vend-complete': vendCompleteFlag })
         });
         if (!res.ok) throw new Error('Failed to vend');
         const data = await res.json();
@@ -79,8 +79,8 @@ let currentVend = 0; // track current vend state
       currentVend = vend; // keep track of state
       const statusEl = document.getElementById('vendStatus');
       if (vend === 1) {
-        // Update button appearance when vending
-        document.getElementById('vendButton').textContent = 'VEND';
+        // Currently vending – show COMPLETE button to finish vend
+        document.getElementById('vendButton').textContent = 'COMPLETE';
         document.getElementById('vendButton').style.backgroundColor = '#ff4155';
         statusEl.textContent = 'Machine is VENDING';
         statusEl.style.color = '#ff4155';
