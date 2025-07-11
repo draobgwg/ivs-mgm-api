@@ -97,6 +97,9 @@ let currentVend = 0; // track current vend state
 
     // Initial load
     fetchVendStatus();
+
+    // Auto refresh every 5 seconds
+    setInterval(fetchVendStatus, 5000);
   </script>
 </body>
 </html>
