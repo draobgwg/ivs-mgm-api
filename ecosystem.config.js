@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: "ivs-mnufc-api",
+            name: "ivs-mgm-api",
             script: "src/index.ts",
             interpreter: "npx",
             interpreter_args: "ts-node",
